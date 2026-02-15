@@ -108,7 +108,7 @@ The Nginx container generates a self-signed SSL certificate at build time:
 # Valid for 365 days
 ```
 
-**Note**: This is a self-signed certificate suitable for development/testing only. In production, use a certificate from a trusted CA (e.g., Let's Encrypt).
+**Note**: This is a self-signed certificate suitable for development/testing only. In production, use a certificate from a trusted CA.
 
 ### Rate Limiting
 
@@ -202,30 +202,3 @@ docker compose down
 # Stop and remove all containers, networks, and volumes
 docker compose down -v
 ```
-
-## Security Considerations
-
-- **Self-signed certificate**: Not suitable for production; use proper CA-signed certificates
-- **Rate limiting**: Protects against basic DoS attacks but not sophisticated DDoS
-- **No authentication**: The servers have no authentication/authorization mechanisms
-- **Docker security**: Follow Docker security best practices in production
-
-## Requirements Met
-
-- ✅ Two Docker containers (Nginx + Test)
-- ✅ Docker Compose orchestration
-- ✅ Nginx serves custom HTML on port 80
-- ✅ HTTPS support with self-signed certificate (port 443)
-- ✅ Error server returning 403 on port 8080
-- ✅ Rate limiting implemented and tested
-- ✅ Automated test suite in Go
-- ✅ GitHub Actions CI/CD pipeline
-- ✅ Comprehensive documentation
-
-## License
-
-This project is part of the F5 DevOps internship assignment.
-
-## Author
-
-Created as part of the F5 Networks DevOps internship home assignment.
