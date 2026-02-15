@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and run tests
+        run: docker compose up --build --abort-on-container-exit --exit-code-from test
+        id: test_step
+        continue-on-error: true
+
+      - name: Create result artifact
+        run: |
+          mkdir -p result
+          if [ "${{ steps.test_step.outcome }}" = "success" ]; then
+            echo "Tests passed successfully" > result/succeeded
+          else
+            echo "Tests failed" > result/failed
+          fi
+
+      - name: Upload test result
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-result
+          path: result/
+
+      - name: Fail if tests failed
+        if: steps.test_step.outcome != 'success'
+        run: exit 1

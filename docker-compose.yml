@@ -1,0 +1,21 @@
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    networks:
+      - f5-network
+
+  test:
+    build: ./test
+    depends_on:
+      - nginx
+    command: ["/bin/sh", "-c", "sleep 3 && /test-runner"]
+    networks:
+      - f5-network
+
+networks:
+  f5-network:
+    driver: bridge
