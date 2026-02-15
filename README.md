@@ -28,7 +28,7 @@ The project consists of two Docker containers orchestrated with Docker Compose:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/f5-devops-assignment.git
+git clone https://github.com/eyal270704-lab/f5-devops-assignment.git
 cd f5-devops-assignment
 
 # Build and run all containers
